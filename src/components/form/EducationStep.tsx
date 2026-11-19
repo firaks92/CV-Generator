@@ -5,6 +5,7 @@ import { useCVStore } from '@/store/cvStore';
 import { ArrowLeft, Plus, Trash2, GraduationCap, Sparkles, Loader2 } from 'lucide-react';
 import { DegreeType } from '@/types';
 import { DEGREE_LABELS } from '@/lib/utils';
+import { generateAISummaryAndAnalysis } from '@/lib/gemini';
 
 export function EducationStep() {
   const {
@@ -34,17 +35,7 @@ export function EducationStep() {
     setGenerationError(null);
 
     try {
-      const res = await fetch('/api/cv/generate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(cv),
-      });
-
-      if (!res.ok) {
-        throw new Error('Ошибка генерации');
-      }
-
-      const data = await res.json();
+      const data = await generateAISummaryAndAnalysis(cv);
       setAIContent(data);
     } catch (err: any) {
       console.error(err);

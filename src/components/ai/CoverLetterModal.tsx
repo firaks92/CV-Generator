@@ -5,6 +5,7 @@ import { useCVStore } from '@/store/cvStore';
 import { X, Sparkles, Download, Copy, Check, Loader2, Building, Briefcase } from 'lucide-react';
 import { exportTextDocumentToPDF } from '@/lib/pdf-export';
 import { transliterate } from '@/lib/utils';
+import { generateAICoverLetter } from '@/lib/gemini';
 
 export function CoverLetterModal() {
   const { cv, setCoverLetter, activeModal, setActiveModal, isGeneratingLetter, setIsGeneratingLetter } =
@@ -25,27 +26,15 @@ export function CoverLetterModal() {
     setErrorMsg(null);
 
     try {
-      const res = await fetch('/api/cv/cover-letter', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          cv,
-          targetCompany: company,
-          targetPosition: position,
-        }),
-      });
-
-      if (!res.ok) throw new Error('Ошибка генерации мотивационного письма');
-
-      const data = await res.json();
-      setLetterContent(data.content);
+      const content = await generateAICoverLetter(cv, company, position);
+      setLetterContent(content);
       setCoverLetter({
-        id: data.id,
+        id: `cl-${Date.now()}`,
         targetCompany: company,
         targetPosition: position,
-        content: data.content,
+        content,
         isEdited: false,
-        generatedAt: data.generatedAt,
+        generatedAt: new Date().toISOString(),
       });
     } catch (err: any) {
       setErrorMsg(err?.message || 'Не удалось сгенерировать письмо');
@@ -61,12 +50,12 @@ export function CoverLetterModal() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleDownloadPDF = () => {
+  const handleDownloadPDF = async () => {
     if (!letterContent) return;
     const author = cv.personalInfo.fullName || 'Кандидат';
     const cleanName = transliterate(author) || 'applicant';
     const fileName = `cover_letter_${cleanName}.pdf`;
-    exportTextDocumentToPDF(
+    await exportTextDocumentToPDF(
       `Мотивационное письмо — ${author}`,
       letterContent,
       author,

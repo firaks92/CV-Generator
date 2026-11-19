@@ -5,6 +5,7 @@ import { useCVStore } from '@/store/cvStore';
 import { X, Sparkles, Download, Copy, Check, Loader2, User, Briefcase, Building } from 'lucide-react';
 import { exportTextDocumentToPDF } from '@/lib/pdf-export';
 import { transliterate } from '@/lib/utils';
+import { generateAIRecommendation } from '@/lib/gemini';
 
 export function RecommendationModal() {
   const {
@@ -36,29 +37,21 @@ export function RecommendationModal() {
     setErrorMsg(null);
 
     try {
-      const res = await fetch('/api/cv/recommendation', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          cv,
-          recommenderName,
-          recommenderPosition,
-          recommenderCompany,
-        }),
-      });
-
-      if (!res.ok) throw new Error('Ошибка генерации рекомендательного письма');
-
-      const data = await res.json();
-      setLetterContent(data.content);
+      const content = await generateAIRecommendation(
+        cv,
+        recommenderName,
+        recommenderPosition,
+        recommenderCompany
+      );
+      setLetterContent(content);
       setRecommendation({
-        id: data.id,
+        id: `rec-${Date.now()}`,
         recommenderName,
         recommenderPosition,
         recommenderCompany,
-        content: data.content,
+        content,
         isEdited: false,
-        generatedAt: data.generatedAt,
+        generatedAt: new Date().toISOString(),
       });
     } catch (err: any) {
       setErrorMsg(err?.message || 'Не удалось составить рекомендацию');
@@ -74,12 +67,12 @@ export function RecommendationModal() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleDownloadPDF = () => {
+  const handleDownloadPDF = async () => {
     if (!letterContent) return;
     const author = cv.personalInfo.fullName || 'Кандидат';
     const cleanName = transliterate(author) || 'applicant';
     const fileName = `recommendation_${cleanName}.pdf`;
-    exportTextDocumentToPDF(
+    await exportTextDocumentToPDF(
       `Рекомендательное письмо на ${author}`,
       letterContent,
       recommenderName,

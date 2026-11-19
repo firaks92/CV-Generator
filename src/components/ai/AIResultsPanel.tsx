@@ -13,6 +13,7 @@ import {
   RefreshCw,
   Loader2,
 } from 'lucide-react';
+import { generateAISummaryAndAnalysis } from '@/lib/gemini';
 
 export function AIResultsPanel() {
   const {
@@ -78,13 +79,7 @@ export function AIResultsPanel() {
     setIsGeneratingAI(true);
     setGenerationError(null);
     try {
-      const res = await fetch('/api/cv/generate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(cv),
-      });
-      if (!res.ok) throw new Error('Ошибка генерации');
-      const data = await res.json();
+      const data = await generateAISummaryAndAnalysis(cv);
       setAIContent(data);
     } catch (err: any) {
       setGenerationError(err?.message || 'Не удалось перегенерировать');
