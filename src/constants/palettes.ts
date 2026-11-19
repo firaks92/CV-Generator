@@ -1,0 +1,95 @@
+import { ColorPalette, PaletteId } from '@/types';
+
+export const PALETTES: Record<PaletteId, ColorPalette> = {
+  'ocean-blue': {
+    id: 'ocean-blue',
+    name: 'Ocean Blue',
+    colors: {
+      primary: '#1E3A5F',
+      accent: '#4A90D9',
+      background: '#FAFAFA',
+      text: '#1A202C',
+      textSecondary: '#4A5568',
+      border: '#CBD5E1',
+      surface: '#FFFFFF',
+    },
+  },
+  'forest-green': {
+    id: 'forest-green',
+    name: 'Forest Green',
+    colors: {
+      primary: '#2D6A4F',
+      accent: '#40916C',
+      background: '#F7FAF8',
+      text: '#1B4332',
+      textSecondary: '#52796F',
+      border: '#D8E2DC',
+      surface: '#FFFFFF',
+    },
+  },
+  'ruby-red': {
+    id: 'ruby-red',
+    name: 'Ruby Red',
+    colors: {
+      primary: '#991B1B',
+      accent: '#DC2626',
+      background: '#FFF8F8',
+      text: '#2D1515',
+      textSecondary: '#6B3A3A',
+      border: '#F3D2D2',
+      surface: '#FFFFFF',
+    },
+  },
+  'royal-purple': {
+    id: 'royal-purple',
+    name: 'Royal Purple',
+    colors: {
+      primary: '#581C87',
+      accent: '#7E22CE',
+      background: '#FAF5FF',
+      text: '#2E1065',
+      textSecondary: '#582C8A',
+      border: '#E9D5FF',
+      surface: '#FFFFFF',
+    },
+  },
+  'monochrome': {
+    id: 'monochrome',
+    name: 'Monochrome',
+    colors: {
+      primary: '#1F2937',
+      accent: '#4B5563',
+      background: '#FFFFFF',
+      text: '#111827',
+      textSecondary: '#4B5563',
+      border: '#E5E7EB',
+      surface: '#F9FAFB',
+    },
+  },
+  'sunset-orange': {
+    id: 'sunset-orange',
+    name: 'Sunset Orange',
+    colors: {
+      primary: '#C2410C',
+      accent: '#EA580C',
+      background: '#FFFBF7',
+      text: '#431407',
+      textSecondary: '#7C2D12',
+      border: '#FED7AA',
+      surface: '#FFFFFF',
+    },
+  },
+  'custom': {
+    id: 'custom',
+    name: 'Своя палитра',
+    colors: {
+      primary: '#1E3A5F',
+      accent: '#4A90D9',
+      background: '#FFFFFF',
+      text: '#1F2937',
+      textSecondary: '#4B5563',
+      border: '#E5E7EB',
+      surface: '#F9FAFB',
+    },
+  },
+};

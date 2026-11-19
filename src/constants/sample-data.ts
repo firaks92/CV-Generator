@@ -1,0 +1,93 @@
+import { CV } from '@/types';
+
+export const INITIAL_CV_STATE: CV = {
+  id: 'default-cv-id',
+  personalInfo: {
+    fullName: 'Иванов Иван Сергеевич',
+    jobTitle: 'Senior Frontend Engineer / Tech Lead',
+    birthYear: 1994,
+    address: 'Москва, Россия',
+    email: 'ivan.ivanov.dev@mail.ru',
+    phone: '+7 (999) 234-56-78',
+    photoUrl: '',
+  },
+  experience: {
+    text: 'Более 8 лет промышленной разработки высоконагруженных веб-сервисов, распределённых интерфейсов и дизайн-систем. Опыт руководства кросс-функциональной командой из 9 инженеров, оптимизации Web Vitals (LCP < 1.2s, CLS < 0.05), внедрения микрофронтендов и автоматизации CI/CD.',
+  },
+  skills: [
+    { id: 'sk-1', name: 'TypeScript', proficiencyLevel: 5, category: 'technical' },
+    { id: 'sk-2', name: 'React / Next.js', proficiencyLevel: 5, category: 'technical' },
+    { id: 'sk-3', name: 'Node.js', proficiencyLevel: 4, category: 'technical' },
+    { id: 'sk-4', name: 'GraphQL / REST API', proficiencyLevel: 4, category: 'technical' },
+    { id: 'sk-5', name: 'PostgreSQL / Redis', proficiencyLevel: 4, category: 'technical' },
+    { id: 'sk-6', name: 'Docker / CI/CD', proficiencyLevel: 4, category: 'tool' },
+    { id: 'sk-7', name: 'Web Performance Optimization', proficiencyLevel: 5, category: 'technical' },
+    { id: 'sk-8', name: 'Архитектура систем', proficiencyLevel: 4, category: 'technical' },
+    { id: 'sk-9', name: 'Team Leadership & Mentoring', proficiencyLevel: 5, category: 'soft' },
+    { id: 'sk-10', name: 'Английский (C1 - Advanced)', proficiencyLevel: 4, category: 'language' },
+  ],
+  workHistory: [
+    {
+      id: 'wh-1',
+      company: 'ПАО Яндекс',
+      position: 'Senior Frontend Developer / Team Lead',
+      startDate: '2021-04',
+      endDate: null,
+      isCurrent: true,
+      description: 'Руководство инженерной группой продуктовой платформы. Проектирование ключевых пользовательских сценариев и модульной архитектуры веб-приложений с аудиторией свыше 4.5 млн MAU.',
+      achievements: [
+        'Сократил время Time-to-Interactive на 42% за счёт code-splitting и серверного стриминга',
+        'Спроектировал и внедрил единую дизайн-систему, ускорив time-to-market новых фич на 30%',
+        'Вырастил 3 middle-разработчиков до уровня senior внутри команды',
+      ],
+    },
+    {
+      id: 'wh-2',
+      company: 'VK (Mail.ru Group)',
+      position: 'Middle+ Frontend Developer',
+      startDate: '2018-09',
+      endDate: '2021-03',
+      isCurrent: false,
+      description: 'Разработка интерфейсов личного кабинета b2b-клиентов и аналитического дашборда на базе React, Redux Toolkit и WebSockets.',
+      achievements: [
+        'Переписал легаси кодовую базу с AngularJS на современный стек TypeScript/React',
+        'Разработал библиотеку визуализации данных для графиков реального времени',
+      ],
+    },
+    {
+      id: 'wh-3',
+      company: 'Иннотех Лабс',
+      position: 'Junior Frontend Developer',
+      startDate: '2016-07',
+      endDate: '2018-08',
+      isCurrent: false,
+      description: 'Вёрстка адаптивных интерфейсов, интеграция с REST API, написание e2e и unit-тестов.',
+      achievements: [
+        'Покрыл критические бизнес-сценарии Jest/Cypress тестами до уровня 85%',
+      ],
+    },
+  ],
+  education: [
+    {
+      id: 'edu-1',
+      institution: 'МГУ им. М.В. Ломоносова',
+      degree: 'master',
+      fieldOfStudy: 'Прикладная математика и информатика',
+      startYear: 2016,
+      endYear: 2018,
+    },
+    {
+      id: 'edu-2',
+      institution: 'МГТУ им. Н.Э. Баумана',
+      degree: 'bachelor',
+      fieldOfStudy: 'Информатика и вычислительная техника',
+      startYear: 2012,
+      endYear: 2016,
+    },
+  ],
+  templateId: 'classic',
+  paletteId: 'ocean-blue',
+  locale: 'ru',
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
+};
